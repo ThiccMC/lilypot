@@ -2,13 +2,16 @@
   "name": "tori",
   "version": "1.0.44",
   "scripts": {
+    "init": "bun x prisma generate --schema nut/prisma/schema.prisma",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
     "@elysiajs/bearer": "^0.5.2",
     "@elysiajs/swagger": "^0.5.2",
-    "elysia": "latest"
+    "@prisma/client": "^5.0.0",
+    "elysia": "latest",
+    "nut": "./nut"
   },
   "devDependencies": {
     "bun-types": "latest"

@@ -1,0 +1,3 @@
+[submodule "nut"]
+	path = nut
+	url = git@github.com:ThiccMC/nut
