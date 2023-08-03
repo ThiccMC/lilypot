@@ -13,6 +13,7 @@ const app = new Elysia()
           version: "1.0.0",
         },
       },
+      path: "/api/vspec"
     })
   )
   .use(v1())

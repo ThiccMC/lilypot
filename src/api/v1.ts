@@ -2,14 +2,21 @@ import { Elysia, t } from "elysia";
 
 import { PrismaClient } from "@prisma/client";
 import path from "../utils/path";
+import { PunishmentDatabase, qind, qpag } from "./lib/pun";
+import env from "../utils/env";
 
 const prisma = new PrismaClient(),
   pth = path(1);
 
 const bound = t.String({
-  default: "Error message",
-  description: "It will likely go wrong, but nothing is exploitable ;)",
-});
+    default: "Error message",
+    description: "It will likely go wrong, but nothing is exploitable ;)",
+  }),
+  punprm = t.Enum({
+    ban: "ban",
+    mute: "mute",
+    warning: "warning",
+  });
 
 export default () => (app: Elysia) =>
   app
@@ -70,18 +77,20 @@ export default () => (app: Elysia) =>
       pth("/badges/:id/owned"),
       async ({ params: { id } }) => {
         console.log(id);
-        return await prisma.badge.findUnique({
-          where: {
-            id,
-          },
-          select: {
-            _count: {
-              select: {
-                ownerships: {},
+        return (
+          (await prisma.badge.findUnique({
+            where: {
+              id,
+            },
+            select: {
+              _count: {
+                select: {
+                  ownerships: {},
+                },
               },
             },
-          },
-        }) || "";
+          })) || ""
+        );
       },
       {
         params: t.Object({
@@ -99,5 +108,33 @@ export default () => (app: Elysia) =>
           }),
           400: bound,
         },
+      }
+    )
+    .get(
+      pth("/punishments/:table/:page"),
+      ({ params: { table, page } }) =>
+        qpag(table as PunishmentDatabase, page, env.punishment.batch),
+      {
+        detail: {
+          description: `Query punishments in batch. Fixed at ${env.punishment.batch} entry per page (configured on the fly).`,
+        },
+        params: t.Object({
+          table: punprm,
+          page: t.Numeric(),
+        }),
+      }
+    )
+    .get(
+      pth("/punishment/:table/:id"),
+      ({ params: { table, id } }) => qind(table as PunishmentDatabase, id),
+      {
+        detail: {
+          description:
+            "Request a detail of a punishment rather than a TLDR list",
+        },
+        params: t.Object({
+          table: punprm,
+          id: t.Numeric(),
+        }),
       }
     );
