@@ -1,6 +1,7 @@
 import { Elysia } from "elysia";
 import { swagger } from "@elysiajs/swagger";
 import v1 from "./api/v1";
+import { cors } from "@elysiajs/cors";
 
 const app = new Elysia()
   .use(
@@ -16,6 +17,7 @@ const app = new Elysia()
       path: "/api/vspec"
     })
   )
+  .use(cors())
   .use(v1())
   .listen(8080);
 

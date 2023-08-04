@@ -4,10 +4,11 @@
   "scripts": {
     "init": "bun x prisma generate --schema nut/prisma/schema.prisma",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "RO_DATABASE_URL=mysql://thicc:hahathanglon@100.86.65.40:3306/thiccban bun run --watch src/index.ts"
   },
   "dependencies": {
     "@elysiajs/bearer": "^0.5.2",
+    "@elysiajs/cors": "^0.5.2",
     "@elysiajs/swagger": "^0.5.2",
     "@prisma/client": "^5.0.0",
     "elysia": "latest",

@@ -57,7 +57,7 @@ export async function qpag(tq: PunishmentDatabase, pg: number, pp = 12) {
   return {
     bound,
     data: await mySQL({
-      q: `SELECT r.name, t.id, t.banned_by_name, t.reason, t.ipban, t.time, t.until, t.removed_by_name, t.removed_by_reason, t.active FROM litebans_${tq}s AS t INNER JOIN litebans_history AS r ON t.uuid = r.uuid WHERE t.silent = 0 ORDER BY t.time LIMIT ? OFFSET ?`,
+      q: `SELECT r.name, t.id, t.banned_by_name AS moderator, t.reason, t.server_origin AS server, t.ipban, t.time, t.until, t.removed_by_name, t.removed_by_reason, t.active FROM litebans_${tq}s AS t INNER JOIN litebans_history AS r ON t.uuid = r.uuid WHERE t.silent = 0 ORDER BY t.time DESC LIMIT ? OFFSET ?`,
       v: [pp, ffset],
     }),
   };
