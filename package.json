@@ -4,7 +4,7 @@
   "scripts": {
     "init": "bun x prisma generate --schema nut/prisma/schema.prisma",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "RO_DATABASE_URL=mysql://thicc:hahathanglon@100.86.65.40:3306/thiccban bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
     "@elysiajs/bearer": "^0.5.2",
