@@ -3,19 +3,19 @@
   "version": "1.0.44",
   "scripts": {
     "start": "bun run src/index.ts",
-    "init": "bun x prisma generate --schema nut/prisma/schema.prisma",
+    "init": "bun x prisma generate --schema node_modules/@thiccmc/nut/prisma/schema.prisma",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
     "@elysiajs/bearer": "^0.5.2",
+    "@elysiajs/cors": "^0.5.2",
     "@elysiajs/eden": "^0.5.6",
     "@elysiajs/swagger": "^0.5.2",
     "@prisma/client": "^5.0.0",
     "@thiccmc/nut": "^1.1.1",
     "elysia": "latest",
-    "mysql2": "^3.5.2",
-    "nut": "./nut"
+    "mysql2": "^3.5.2"
   },
   "devDependencies": {
     "bun-types": "latest"

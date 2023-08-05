@@ -3,6 +3,7 @@ import { swagger } from "@elysiajs/swagger";
 import v1 from "./api/v1";
 import makeMetrics, { Metric } from "./utils/prometheus";
 import env from "./utils/env";
+import { cors } from "@elysiajs/cors";
 
 const swag = (v: string) =>
   swagger({
@@ -26,6 +27,7 @@ const swag = (v: string) =>
 
 const app = new Elysia()
   .use(swag("1.0.0"))
+  .use(cors())
   .group("/api", (app) => app.use(v1()));
 
 app
