@@ -1,4 +1,4 @@
-import mySQL from "../../func/mysqlc";
+import { mySQL } from "../../func/db";
 import { dirtyUnsignedInterger } from "../../utils/engine";
 
 const allowedDatabases = ["ban", "warn", "mute"] as const;

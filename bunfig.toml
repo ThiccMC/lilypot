@@ -1,0 +1,3 @@
+[install.scopes]
+
+"@thiccmc" = { token = "$GHNPM_TOKEN", url = "https://npm.pkg.github.com" }
